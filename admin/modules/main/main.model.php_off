@@ -1,0 +1,408 @@
+<?php
+
+class ModelMain {
+	
+	public function getVipRequests($country_id = 1) {
+		$query = "
+		SELECT
+		    IF( a.country_id = 1, 'ua', IF( a.country_id = 2, 'ru', 'by' ) ) AS country_code, a.*,
+		    vr.type, vr.date_add AS request_date,
+		    ui.contact_phones AS user_phones, s.name AS section_name
+		FROM
+		(
+            (
+                SELECT
+                    country_id,
+                    activity.activity_id AS resource_id,
+                    5 AS section_id,
+                    'activity' As type,
+                    activity.user_id,
+                    activity.user_name,
+                    activity.name,
+                    activity.flag_vip_add,
+                    date_add
+                FROM `activity`
+                WHERE flag_delete = 0 -- AND country_id = $country_id
+                AND IF(date_start = '0000-00-00', 1,
+                    IF(date_end != '0000-00-00', date_end > '" . DB::now(1) . "', date_start > '" . DB::now(1) . "')
+                )
+            ) UNION (
+                SELECT
+                    country_id,
+                    ads.ads_id AS resource_id,
+                    4 AS section_id,
+                    'ads' As type,
+                    user_id,
+                    user_name,
+                    product_name AS name,
+                    flag_vip_add,
+                    date_add
+                FROM `ads`
+                WHERE ads.flag_delete = 0 -- AND ads.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    p.product_new_id AS resource_id,
+                    3 AS section_id,
+                    'products_new' As type,
+                    user_id,
+                    user_name,
+                    product_name AS name,
+                    flag_vip_add,
+                    date_add
+                FROM `products_new` AS p
+                WHERE p.flag_delete = 0 -- AND p.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    s.service_id AS resource_id,
+                    9 AS section_id,
+                    'services' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add,
+                    date_add
+                FROM `services` AS s
+                WHERE s.flag_delete = 0 -- AND s.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    d.demand_id AS resource_id,
+                    11 AS section_id,
+                    'demand' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add,
+                    date_add
+                FROM `demand` AS d
+                WHERE d.flag_delete = 0 -- AND d.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    l.lab_id AS resource_id,
+                    7 AS section_id,
+                    'labs' AS type,
+                    user_id,
+                    (SELECT name FROM `users_info` WHERE user_id = l.user_id) AS user_name,
+                    name,
+                    flag_vip_add,
+                    date_add
+                FROM `labs` AS l
+                WHERE l.flag_delete = 0 -- AND l.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    r.realty_id AS resource_id,
+                    8 AS section_id,
+                    'realty' AS type,
+                    user_id,
+                    user_name,
+                    CONCAT(name, ', г. ', city_name) AS name,
+                    flag_vip_add,
+                    date_add
+                FROM `realty` AS r
+                WHERE r.flag_delete = 0 -- AND r.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    d.diagnostic_id AS resource_id,
+                    10 AS section_id,
+                    'diagnostic' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add,
+                    date_add
+                FROM `diagnostic` AS d
+                WHERE d.flag_delete = 0 -- AND d.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    w.work_id AS resource_id,
+                    6 AS section_id,
+                    'resume' AS type,
+                    user_id,
+                    user_name,
+                    (SELECT GROUP_CONCAT(name SEPARATOR ', ') FROM `categories_work` WHERE categ_id IN(SELECT categ_id FROM `work_categs` WHERE work_id = w.work_id)) AS name,
+                    flag_vip_add,
+                    date_add
+                FROM `work` AS w
+                WHERE w.flag_delete = 0 -- AND w.country_id = $country_id
+            ) UNION (
+                SELECT
+                    country_id,
+                    v.vacancy_id AS resource_id,
+                    15 AS section_id,
+                    'vacancies'	AS type,
+                    v.user_id,
+                    c.name AS user_name,
+                    CONCAT((SELECT GROUP_CONCAT(name SEPARATOR ', ') FROM `categories_work` WHERE categ_id IN(SELECT categ_id FROM `vacancies_categs` WHERE vacancy_id = v.vacancy_id)), ', г. ', city_name) AS name,
+                    flag_vip_add,
+                    date_add
+                FROM `vacancies` AS v
+                INNER JOIN `vacancy_company_info` AS c USING(company_id)
+                WHERE v.flag_delete = 0 -- AND v.country_id = $country_id
+            )
+		) AS a
+		INNER JOIN `vip_requests` `vr` USING( resource_id )
+		INNER JOIN `users_info` `ui` USING( user_id )
+		INNER JOIN `sections` `s` ON s.section_id = a.section_id
+		WHERE a.flag_vip_add = 1
+		ORDER BY a.date_add DESC
+		";
+
+        $items  = \DB::getAssocGroup( $query );
+
+        foreach( $items as & $item ) {
+            $item = array_map( function( $row ){
+                $row['user_phones'] = join( "\n", explode( ',', $row['user_phones'] ) );
+                $row['type_name']   = $row['type'] == 1 ? 'Самолет' : $row['type'] == 2 ? 'Машинка' : 'Велосипед';
+                $row['url']			= Site::getSectionUrlById($row['section_id']);
+                return $row;
+            }, $item );
+        }
+
+        return $items;
+
+	}
+
+    public function getVipAds() {
+
+        $query = "
+		SELECT
+		    IF( a.country_id = 1, 'ua', IF( a.country_id = 2, 'ru', 'by' ) ) AS country_code, a.*,
+		    x.*, CONCAT( a.resource_id, a.section_id ) AS row_key, MIN(x.ads_type) min_type,
+		    ui.contact_phones AS user_phones, s.name AS section_name,
+		    DATEDIFF( x.date_end, x.date_start ) AS date_diff,
+		    DATEDIFF( x.date_end, NOW() ) AS days_left
+		FROM
+		(
+            (
+                SELECT
+                    country_id,
+                    activity.activity_id AS resource_id,
+                    5 AS section_id,
+                    'activity' As type,
+                    activity.user_id,
+                    activity.user_name,
+                    activity.name,
+                    activity.flag_vip_add
+                FROM `activity`
+                WHERE flag_delete = 0
+                AND IF(date_start = '0000-00-00', 1,
+                    IF(date_end != '0000-00-00', date_end > '" . DB::now(1) . "', date_start > '" . DB::now(1) . "')
+                )
+            ) UNION (
+                SELECT
+                    country_id,
+                    ads.ads_id AS resource_id,
+                    4 AS section_id,
+                    'ads' As type,
+                    user_id,
+                    user_name,
+                    product_name AS name,
+                    flag_vip_add
+              FROM `ads`  inner join  liqpay_status  ON ads.ads_id=liqpay_status.ads_id
+				WHERE ads.flag_delete = 0  AND liqpay_status.status='success'
+            ) UNION (
+                SELECT
+                    country_id,
+                    p.product_new_id AS resource_id,
+                    3 AS section_id,
+                    'products_new' As type,
+                    user_id,
+                    user_name,
+                    product_name AS name,
+                    flag_vip_add
+                FROM `products_new` AS p
+                WHERE p.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    s.service_id AS resource_id,
+                    9 AS section_id,
+                    'services' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add
+                FROM `services` AS s
+                WHERE s.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    d.demand_id AS resource_id,
+                    11 AS section_id,
+                    'demand' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add
+                FROM `demand` AS d
+                WHERE d.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    l.lab_id AS resource_id,
+                    7 AS section_id,
+                    'labs' AS type,
+                    user_id,
+                    (SELECT name FROM `users_info` WHERE user_id = l.user_id) AS user_name,
+                    name,
+                    flag_vip_add
+                FROM `labs` AS l
+                WHERE l.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    r.realty_id AS resource_id,
+                    8 AS section_id,
+                    'realty' AS type,
+                    user_id,
+                    user_name,
+                    CONCAT(name, ', г. ', city_name) AS name,
+                    flag_vip_add
+                FROM `realty` AS r
+                WHERE r.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    d.diagnostic_id AS resource_id,
+                    10 AS section_id,
+                    'diagnostic' AS type,
+                    user_id,
+                    user_name,
+                    name,
+                    flag_vip_add
+                FROM `diagnostic` AS d
+                WHERE d.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    w.work_id AS resource_id,
+                    6 AS section_id,
+                    'resume' AS type,
+                    user_id,
+                    user_name,
+                    (SELECT GROUP_CONCAT(name SEPARATOR ', ') FROM `categories_work` WHERE categ_id IN(SELECT categ_id FROM `work_categs` WHERE work_id = w.work_id)) AS name,
+                    flag_vip_add
+                FROM `work` AS w
+                WHERE w.flag_delete = 0
+            ) UNION (
+                SELECT
+                    country_id,
+                    v.vacancy_id AS resource_id,
+                    15 AS section_id,
+                    'vacancies'	AS type,
+                    v.user_id,
+                    c.name AS user_name,
+                    CONCAT((SELECT GROUP_CONCAT(name SEPARATOR ', ') FROM `categories_work` WHERE categ_id IN(SELECT categ_id FROM `vacancies_categs` WHERE vacancy_id = v.vacancy_id)), ', г. ', city_name) AS name,
+                    flag_vip_add
+                FROM `vacancies` AS v
+                INNER JOIN `vacancy_company_info` AS c USING(company_id)
+                WHERE v.flag_delete = 0
+            )
+		) a
+
+		INNER JOIN
+		(
+            (
+                SELECT *, '1' AS ads_type
+                FROM top_to_main
+            )
+            UNION
+            (
+                SELECT *, '2' AS ads_type
+                FROM top_to_section
+            )
+            UNION
+            (
+                SELECT *, '3' AS ads_type
+                FROM top_to_category
+            )
+		) x ON a.resource_id = x.resource_id AND a.section_id = x.section_id
+
+		INNER JOIN `users_info` `ui` USING( user_id )
+
+		INNER JOIN `sections` `s` ON s.section_id = a.section_id
+
+		WHERE
+		    x.date_end > NOW()
+        GROUP BY
+            row_key
+		ORDER BY
+		    x.ads_type ASC
+		";
+
+        $items  = \DB::getAssocGroup( $query );
+
+        foreach( $items as & $item ) {
+            $item = array_map( function( $row ){
+                $row['user_phones'] = join( "\n", explode( ',', $row['user_phones'] ) );
+                $row['url']			= Site::getSectionUrlById( $row['section_id'] );
+                return $row;
+            }, $item );
+        }
+
+        return $items;
+
+    }
+
+	public function getVipMainAds() {
+		
+	}
+	
+	public function getVipSectionAds() {
+		
+	}
+	
+	public function getVipCategoryAds() {
+		
+	}
+	
+	public function getPayment(){
+	  $query="
+		SELECT
+			l.ads_id,
+			l.price,
+			ads.contact_phones ,
+		ads.user_name,
+		(SELECT SUM(price) from  liqpay_status where  status='success' and  service_payment is not null ) as all_suma,
+		(SELECT SUM(price) from  liqpay_status where service_payment= 'portmone' and  status='success') as portmone_suma,
+		(SELECT SUM(price) from  liqpay_status where service_payment= 'liqpay' and  status='success') as liqpay_suma,
+		l.service_payment,
+		l.order_id
+		from liqpay_status l  INNER JOIN  ads ON l.ads_id= ads.ads_id
+		WHERE  status='success'";
+		
+	 $all=\DB::getAssocArray($query);
+	   foreach($all as $k=>$v){
+	        
+			$id_data =explode('~',$v['order_id']);
+			$v['order_id']=$id_data [2];
+			if('liqpay'==$v['service_payment']){
+				$liqpay[]=$v;
+				$liq_count=$v['liqpay_suma'];
+			}else{
+			        
+				$portmone[]=$v;
+				$port_count=$v['portmone_suma'];
+			}
+		  
+	   
+	   }
+	   
+	 
+	 return array(
+		'port'=>$portmone,
+		'liq'=>$liqpay,
+		'port_count'=>$port_count,
+		'liq_count'=>$liq_count
+		);
+	}
+	
+}
+
+?>

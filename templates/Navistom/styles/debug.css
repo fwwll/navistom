@@ -1,0 +1,65 @@
+.debug {
+    position: fixed;
+    box-sizing: border-box;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 500px;
+    /*padding: 50px 0 0 0;*/
+    z-index: 9999;
+    background: #f2f4f5;
+    border-top: 1px solid #e9edf0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+}
+
+.debug .debug-query-list {
+    box-sizing: border-box;
+    width: 880px;
+    height: inherit;
+    margin: 0 auto 0 auto;
+    overflow-y: auto;
+}
+
+.debug-load-times {
+    position: fixed;
+    background: #FFF;
+    padding: 20px;
+    border-radius: 3px;
+    right: 20px;
+    bottom: 20px;
+    margin-top: 20px;
+    width: 180px;
+    z-index: 99999;
+    border: 1px solid #e9edf0;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, .1);*/
+}
+
+.debug-query-list li {
+    position: relative;
+}
+
+.debug-query-list .query-time {
+    position: absolute;
+    top: 1px;
+    right: 21px;
+    padding: 5px;
+    background: #adb1bf;
+    color: #FFF;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 0 3px 0 3px;
+}
+
+.debug-load-times dl.a-list {
+    margin-bottom: 0;
+}
+
+.debug-load-times dl.a-list.a-horizontal > dt {
+    width: 60%;
+    font-weight: 400;
+}
+
+.debug-load-times dl.a-list.a-horizontal > dd {
+    margin: 0 0 0 60%;
+    font-weight: 700;
+}

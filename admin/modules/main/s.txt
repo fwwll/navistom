@@ -1,0 +1,97 @@
+SELECT  tabl.* ,us.name,us.contact_phones  FROM (
+	(
+	 SELECT
+		 prod.product_new_id  AS resource_id,
+		 prod.product_name as content,
+		 prod.user_id ,
+		 l.section_id,
+		 l.service_payment
+		 FROM products_new AS prod
+			INNER JOIN  liqpay_status AS l ON prod.product_new_id=l.ads_id and l.section_id =3 and l.status ='sandbox'
+				
+
+	)UNION(
+	
+	 SELECT 
+		ads.ads_id ,
+		ads.content,
+		ads.user_id,
+		l.section_id ,
+		l.service_payment
+		FROM ads
+			INNER JOIN  liqpay_status AS l ON ads.ads_id=l.ads_id and l.section_id =4 and (l.status ='sandbox' or  l.status='success') 
+	 	
+			
+  )UNION(
+    SELECT
+		activity.activity_id,
+		activity.name,
+		activity.user_id,
+		l.section_id,
+		l.service_payment
+		FROM activity
+		INNER JOIN  liqpay_status AS l ON  activity.activity_id=l.ads_id and l.section_id =5 and l.status ='sandbox'	
+		
+  )UNION(
+	
+	SELECT
+		lab.lab_id,
+		lab.content,
+		lab.user_id,
+		l.section_id,
+		l.service_payment
+		FROM labs AS lab
+		INNER JOIN  liqpay_status AS l ON lab.lab_id=l.ads_id and l.section_id =7 and l.status ='sandbox'
+	
+		
+  )UNION(
+	SELECT
+		 realty.realty_id,
+		 realty.name,
+		 realty.user_id,
+		 l.section_id,
+		 l.service_payment
+		 FROM realty 
+			INNER JOIN  liqpay_status AS l ON realty.realty_id=l.ads_id and l.section_id =8 and l.status ='sandbox'	
+  
+			
+  )UNION(
+	SELECT
+		 services.service_id,
+		 services.name,
+		 services.user_id,
+		 l.section_id,
+		 l.service_payment
+		 FROM services
+			INNER JOIN  liqpay_status AS l ON services.service_id=l.ads_id and l.section_id =9 and l.status ='sandbox'
+  
+			
+  )UNION(
+	SELECT
+		diagnostic.diagnostic_id,
+		diagnostic.name,
+		diagnostic.user_id,
+		l.section_id,
+		l.service_payment
+		FROM diagnostic
+		INNER JOIN  liqpay_status AS l ON  diagnostic.diagnostic_id=l.ads_id and l.section_id =10 and l.status ='sandbox'
+
+  )UNION(
+  
+	SELECT
+		demand.demand_id,
+		demand.name,
+		demand.user_id,
+		l.section_id,
+		l.service_payment
+		FROM demand
+		INNER JOIN  liqpay_status AS l ON demand.demand_id=l.ads_id and l.section_id =11 and l.status ='sandbox'
+  )
+  
+
+) as tabl 
+INNER JOIN  users_info AS us  ON tabl.user_id= us.user_id
+INNER JOIN  light_content AS l_s  ON  tabl.resource_id = l_s.resource_id 
+				AND  tabl.section_id =l_s.section_id 
+				AND  l_s.date_start<= '2015-09-14' AND  l_s.date_end > '2015-09-14'
+

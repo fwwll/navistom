@@ -1,0 +1,1 @@
+<a class="ajax-link" href="user/profile-{{data.user_id}}">{{data.name}}</a>

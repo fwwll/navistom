@@ -1,0 +1,63 @@
+{
+    "javascript": {
+        "output": "templates/complete/all.min.js",
+        "files": [
+            "assets/jquery/jquery.min.js",
+            "assets/jqueryUI/jquery-ui-1.10.2.custom.min.js",
+            "assets/jqueryUI/jquery.ui.datepicker-ru.js",
+            "assets/ajaxScroll/jquery-ias.js",
+            "assets/monthpicker/jquery.monthpicker.js",
+            "assets/jqueryUI/jquery-ui-timepicker-addon.js",
+            "assets/jqueryUI/jquery-ui-timepicker-ru.js",
+            "assets/inputLimiter/jquery.inputlimiter.js",
+            "assets/validationEngine/jquery.validationEngine.js",
+            "assets/validationEngine/jquery.validationEngine-ru.js",
+            "assets/select2/select2.js",
+            "assets/listnav/jquery.listnav.pack-2.1.js",
+            "assets/qaptcha/QapTcha.jquery.js",
+            "assets/qaptcha/jquery.ui.touch.js",
+            "assets/jqueryForm/jquery.form.js",
+            "assets/idTabs/jquery.idTabs.min.js",
+            "assets/uniform/jquery.uniform.js",
+            "assets/redactorjs/redactor.jquery.js",
+            "assets/redactorjs/redactor.jquery.ru.js",
+            "assets/fineuploader/jquery.fineuploader.js",
+            "assets/autosize/jquery.autoresize.js",
+            "assets/address/jquery.address.min.js",
+            "assets/scrollUp/jquery.scrollUp.min.js",
+            "assets/confirm/jquery.confirm.js",
+            "assets/knob/jquery.knob.js",
+            "assets/jqueryTools/jquery.tools.min.js",
+            "assets/gallery/jquery.gallery.min.js",
+            "assets/qtip/jquery.qtip.min.js",
+            "assets/tagsInput/jquery.tagsinput.js",
+            "assets/mtip/mtip.js",
+            "assets/cookies/jquery.cookie.js",
+            "templates/Navistom/scripts/main.js"
+        ]
+    },
+
+    "css": {
+        "output": "templates/complete/all.min.css",
+        "files": [
+            "assets/jqueryUI/jquery-ui.custom.css",
+            "assets/jqueryUI/jquery-ui-timepicker-addon.css",
+            "assets/validationEngine/validationEngine.jquery.css",
+            "assets/qaptcha/QapTcha.jquery.css",
+            "assets/redactorjs/redactor.jquery.css",
+            "assets/uniform/jquery.uniform.base.css",
+            "assets/mtip/mtip.css",
+            "assets/qtip/jquery.qtip.css",
+            "assets/select2/select2.css",
+            "assets/gallery/jquery.gallery.css",
+            "assets/ajaxScroll/jquery.ias.css",
+            "assets/confirm/jquery.confirm.css",
+            "assets/tagsInput/jquery.tagsinput.css",
+            "assets/acorn-ui/acorn-ui.box.css",
+            "assets/acorn-ui/acorn-ui.css",
+            "templates/Navistom/styles/subscribe.css",
+            "templates/Navistom/styles/main.css"
+
+        ]
+    }
+}

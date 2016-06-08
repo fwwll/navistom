@@ -1,0 +1,27 @@
+AddDefaultCharset utf-8
+
+Options +SymLinksIfOwnerMatch  
+RewriteEngine On  
+
+RewriteCond %{HTTP_HOST} ^www.navistom.com$ [NC]
+RewriteRule ^(.*)$ http://navistom.com/$1 [R=301,L]
+
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f 
+
+RewriteRule ^(.*)$ ./index.php?route=$1
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    ExpiresByType image/gif "access plus 2 months"
+    ExpiresByType image/jpeg "access plus 2 months"
+</IfModule>
+
+# Order Deny,Allow
+deny from all
+Allow from 93.188.36.16 , 178.137.130.103 , 89.252.34.121 , 176.104.1.114
+addDefaultCharset UTF-8
+
+

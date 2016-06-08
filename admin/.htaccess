@@ -1,0 +1,9 @@
+AddDefaultCharset utf-8
+
+Options +SymLinksIfOwnerMatch 
+RewriteEngine On  
+  
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f  
+  
+RewriteRule ^(.*)$ ./index.php?route=$1

@@ -1,0 +1,408 @@
+* {
+    margin:0;
+    padding:0;
+    outline:none;
+}
+
+html{
+	width:100%;
+	height:100%;
+}
+body{
+	margin:0 auto;
+	max-width:800px;
+   font-family: roboto;
+}
+img {
+    border: medium none;
+}
+a {
+    color: #000;
+    cursor: pointer;
+    outline: 0 none;
+    text-decoration: none;
+}
+/* --------navi-icon------------ */
+
+[class*=" navi-icon-"],[class^=navi-icon-] {
+    display: block;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    vertical-align: middle;
+    background: url(/templates/Navistom/images/navi-icons.png) no-repeat
+}
+
+.navi-icon-activity {
+    background-position: 0 0
+}
+
+.navi-icon-ads {
+    background-position: 0 -148px
+}
+
+.navi-icon-demand {
+    background-position: 0 -296px
+}
+
+.navi-icon-diagnostic {
+    background-position: 0 -444px
+}
+
+.navi-icon-labs {
+    background-position: 0 -592px
+}
+
+.navi-icon-products-new {
+    background-position: 0 -740px
+}
+
+.navi-icon-realty {
+    background-position: 0 -888px
+}
+
+.navi-icon-service {
+    background-position: 0 -1036px
+}
+
+.navi-icon-stock {
+    background-position: 0 -1184px
+}
+
+.navi-icon-work {
+    background-position: 0 -1332px
+}
+
+.navi-icon-articles {
+    background: url(/templates/Navistom/images/articles-icon-48.png) no-repeat
+}
+/* --------navi-icon------------ */
+
+/* ------------a-icon------------ */
+[class*=" a-icon-"], [class^="a-icon-"] {
+    background: rgba(0, 0, 0, 0) url("/assets/acorn-ui/glyphicons-halflings.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 1px;
+    vertical-align: text-top;
+    width: 14px;
+}
+
+
+.a-icon-chevron-left {
+    background-position: -432px -72px;
+}
+.a-icon-gray {
+    opacity: 0.5;
+}
+
+.a-icon-chevron-right {
+    background-position: -456px -72px;
+}
+
+/* ------------a-icon------------ */
+
+
+
+
+
+#logo {
+	text-decoration:none;
+}
+#logo span{
+	color:#000;
+	font-size:37px;
+}
+.menu{
+	position:relative;
+	top:-2px;
+}
+
+
+#auth-menu {
+    float: right;
+    padding: 15px 0 0;
+	font-size:12px;
+}
+#auth-menu a{
+	color:#000;
+	text-decoration:none;
+}
+ul {
+    list-style: outside none none;
+}
+
+#auth-menu li {
+    float: left;
+    margin: 0 0 0 10px;
+    position: relative;
+}
+
+.all_bottom {
+    float:right;
+    font-family: "PT Sans",sans-serif;
+    font-weight: 400;
+    margin-left: 10px;
+    position: relative;
+	margin-top: 10px;
+}
+.add_oby {
+    background: #f39130 none repeat scroll 0 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    height: 29px;
+    line-height: 30px;
+    padding-left: 18px;
+    text-align: center;
+    width: 182px;
+}
+.add_oby span {
+    font-size: 23px;
+    position: absolute;
+    left: 8px;
+   
+}
+
+.menu_top_right {
+    background: #fff none repeat scroll 0 0;
+    border: 2px solid #dbdddc;
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 182px;
+	font-family:Roboto;
+	font-size:14px;
+}
+
+#main{
+	background: #fff none repeat scroll 0 0;
+    padding: 9px 0px 20px;
+    width: 840px;
+    z-index: 2;
+}
+
+.n-main-nav {
+    background: #f0f0f0 none repeat scroll 0 0;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.n-main-nav .left {
+    display: inline-block;
+    vertical-align: top;
+    width: 580px;
+}
+
+#global-search {
+    margin: 0 0 30px;
+    position: relative;
+}
+
+#global-search-input {
+    height: 38px;
+    padding: 10px 90px 10px 10px;
+    width: 100%;
+}
+
+#search-submit {
+    background: url('/tpl/image/linza.png')no-repeat center;
+    border: medium none;
+    color: #fff;
+    cursor: pointer;
+    height: 31px;
+    line-height: 18px;
+    padding: 10px 20px;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 65px;
+    border-left: 1px solid #999;
+}
+
+
+.n-main-nav .right {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e4e4e4;
+    display: inline-block;
+    margin-left: 10px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+    width: 180px;
+}	
+
+#main-navigation ul {
+    margin: -3px 0 0 -10px;
+}
+
+#main-navigation ul li, #offers-menu ul li, #search-menu ul li {
+    float: left;
+}
+
+#main-navigation ul li a {
+    font-size: 12px;
+    height: 108px;
+    margin: 10px 0 0 10px;
+    padding: 10px;
+    width: 108px;
+}
+#main-navigation ul li a > div {
+    bottom: 10px;
+    left: 10px;
+}
+
+#main-navigation ul li a, #offers-menu ul li a, #search-menu ul li a {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #b4b4b4;
+    display: block;
+    height: 109px;
+    margin: 10px 0 0 10px;
+    padding: 0px;
+    position: relative;
+    text-transform: uppercase;
+    width: 105px;
+}
+
+#main-navigation ul li a > div, #offers-menu ul li a > div, #search-menu ul li a > div {
+    /* bottom: 20px;
+    left: 20px; */
+    position: absolute;
+	font-size:11px;
+}
+
+#main-navigation  ul li  i{
+	position:relative;
+    left:10px;
+    top:5px;
+}
+
+#main-scroller {
+    font-family: "PT Sans Narrow",sans-serif;
+    height: 300px;
+    margin-left: -10px;
+    overflow: hidden;
+    position: relative;
+    width: 180px;
+}
+#main-scroller .scroller-items {
+    clear: both;
+    position: absolute;
+    width: 20000em;
+}
+
+#main-scroller .scroller-items > div {
+    float: left;
+    width: 180px;
+}
+
+#main-scroller .scroller-item {
+    float: left;
+    height: 300px;
+    margin: 0 0 0 5px;
+    padding: 18px;
+    position: relative;
+    width: 180px;
+}
+#main-scroller .scroller-item a {
+    display: block;
+    font-size: 17px;
+    line-height: 22px;
+    margin-top: 20px;
+}
+
+.n-main-nav .scroller-navi {
+    bottom: 10px;
+    height: 15px;
+    left: 0;
+    line-height: 15px;
+    padding: 0 10px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.scroller-navi .all {
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.scroller-navi .next, .scroller-navi .prev {
+    left: 26px;
+    position: absolute;
+}
+
+.scroller-navi .next {
+    left: auto;
+    right: 34px;
+}
+
+
+.text_bottom_menu{
+	text-align:center;
+	width:100%;
+	font-size:24px;
+	
+}
+
+.l_top {
+    background: #ff5722 none repeat scroll 0 0;
+    border-radius: 50%;
+    display: inline-block;
+    height: 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 30px;
+}
+
+.l_top span {
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    left: 6px;
+    position: relative;
+    top: 9px;
+}
+
+
+
+.l_top + a {
+    left: 40px;
+    position: absolute;
+    top: 11px;
+}
+
+
+.item {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #b4b4b4;
+    margin: 0 0 15px;
+    min-height: 100px;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+	display:block;
+}
+.item.pagination-block.light {
+    border: 1px solid #b4b4b4;
+}
+
+.a-offset-0 [class*=" a-cols-"], .a-offset-0 [class^="a-cols-"] {
+    margin-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.a-font-small {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+

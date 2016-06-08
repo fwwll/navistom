@@ -1,0 +1,342 @@
+/* Subscribe UI */
+
+.s-mess, [class^="s-mess-"], [class*=" s-mess-"] {
+    position: relative;
+    background: #8f7fbc;
+    padding: 15px 15px 15px 86px;
+    color: #FFF;
+    line-height: 20px;
+    border-radius: 2px;
+    margin-bottom: 47px;
+}
+
+.s-mess:after, [class^="s-mess-"]:after, [class*=" s-mess-"]:after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #8273ac URL('../images/subscribe-info-icon.png') center center no-repeat;
+    border-radius: 2px 0 0 2px;
+}
+
+.s-mess-green {
+    background: #86bc7f;
+    margin-bottom: 20px;
+}
+
+.s-mess-green:after {
+    background: #77a571 URL('../images/subscribe-mess-ok-icon.png') center center no-repeat;
+}
+
+.s-status-ok,
+.s-status-false {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #6dbcaf;
+    line-height: 75px;
+    font-size: 13px;
+}
+
+.s-status-false {
+    color: #d86356;
+}
+
+.s-option-row {
+    line-height: 36px;
+    margin-bottom: 0 !important;
+}
+
+/* End subscribe UI */
+
+/* Subscribe styles */
+
+ul.cabinet-tabs-menu li.active.subscribe a::after {
+    background: #8f7fbc;
+}
+
+#subscribe-form {
+    margin: 0;
+}
+
+#subscribe-form .select2-container-multi .select2-choices .select2-search-choice {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.mess-subscribe {
+    position: relative;
+    background: #99B45F URL('../images/subscribe-icon.png') 563px 20px no-repeat;
+    padding: 20px 90px 20px 20px;
+    color: #FFF;
+    margin-bottom: 30px;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+.mess-subscribe .sys-mess {
+    padding: 11px 7px 11px 10px;
+    border-left: #8BA356 3px solid;
+    margin: 20px -70px 0 0;
+    background: #FFF;
+    color: #333;
+}
+
+.mess-subscribe .user-mail {
+    margin: 15px -70px 20px 0;
+    line-height: 34px;
+}
+
+.mess-subscribe .user-mail > b {
+    border-bottom: #fff 1px dashed;
+}
+
+/*.subscribe-options {
+	margin:0 -70px  0 0;
+	padding:20px 0 0 0;
+	line-height:34px;
+	border-top: #A6C368 1px solid;
+	box-shadow:0 -1px 0 #8DA755;
+}*/
+
+.mess-subscribe > h3 {
+    display: inline-block;
+    padding-bottom: 15px;
+    border-bottom: #A6C368 1px solid;
+    font-size: 18px;
+    line-height: 13px;
+}
+
+.mess-subscribe .description {
+    margin-top: 10px;
+    line-height: 20px;
+}
+
+.subscribe-item {
+    position: relative;
+    padding: 30px 0;
+    margin-bottom: -10px;
+    background: URL('../images/subscribe-hr.png') left top repeat-x;
+}
+
+.subscribe-item .item-name {
+    position: relative;
+    float: left;
+    width: 150px;
+    min-height: 150px;
+}
+
+.subscribe-item .item-name > .name {
+    margin: 10px 0 10px 0;
+    text-transform: uppercase;
+}
+
+.subscribe-item .item-subscribe > span {
+    font-size: 13px;
+    color: #999;
+}
+
+.subscribe-item .subscribe-item-form {
+    margin-left: 150px;
+}
+
+.subscribe-item .subscribe-item-form > .row {
+    margin: 0 0 20px 0;
+}
+
+#subscribe-form .submit-row {
+    margin: 20px 0 0 0;
+    padding: 20px 0 0 0;
+}
+
+#subscribe-form .select-2 {
+    width: 100%;
+}
+
+#subscribe-form .select-2 .select2-choices {
+    border: #ccc 1px solid;
+    border-radius: 2px;
+    /*padding:1px;*/
+    /*box-shadow:inset 0 0 7px rgba(0, 0, 0, .07);*/
+}
+
+#subscribe-form .select2-container-multi .select2-choices > div {
+    right: 11px;
+    top: 11px;
+}
+
+#subscribe-form .select2-dropdown-open {
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.select2-drop.select2-drop-multi {
+    box-shadow: 0 -3px 0 -1px #FFF;
+}
+
+.select2-drop {
+    border-color: #CCC;
+    box-shadow: none;
+}
+
+.select2-results .select2-highlighted {
+    /*background:#A6C368;*/
+    background: #626d7f;
+}
+
+.select2-results .select2-result-label {
+    padding: 7px 5px
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    padding: 5px 9px 5px 22px;
+    margin: 5px 0 0 5px;
+    border-radius: 2px;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1);
+}
+
+.select2-results {
+    margin: 4px;
+}
+
+.select2-container-multi .select2-search-choice-close {
+    left: 6px;
+    top: 7px;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+    padding: 9px 11px;
+    margin: 2px 0;
+}
+
+#subscribe-form .row > label {
+    text-align: left;
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.subscribe-item a.select-all {
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+}
+
+.subscribe-section-reset {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    color: #999;
+    border-bottom: #999 1px dashed;
+}
+
+/* End subscribe */
+
+.demand-link {
+    line-height: 24px;
+    padding-left: 35px;
+}
+
+.checkbox-row {
+    line-height: 38px;
+}
+
+.checkbox-row > span {
+    display: block;
+    float: none;
+    width: 100%;
+    padding-right: 15px;
+    line-height: 34px;
+}
+
+.checkbox {
+    display: inline-block;
+    line-height: 12px;
+}
+
+.a-row .checkbox {
+    float: right;
+    width: 76%;
+}
+
+.checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox label {
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.checkbox label > i {
+    position: absolute;
+    left: auto;
+    margin-left: 10px;
+    top: 8px;
+    background-position: -216px -96px;
+}
+
+.checkbox label:before, .checkbox label:after {
+    display: inline-block;
+    border-radius: 2px;
+    color: #333;
+    line-height: 36px;
+    padding: 0 16px;
+}
+
+.checkbox label:before {
+    content: attr(data-yes);
+    border-radius: 2px 0 0 2px;
+    background: #626d7f;
+    box-shadow: none;
+    color: #FFF;
+}
+
+.checkbox > label:after {
+    content: attr(data-no);
+    background: #4d5869;
+    border-radius: 0 2px 2px 0;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+    border-left: none;
+    color: #FFF;
+}
+
+.checkbox.work label:before {
+    content: "Вакансии";
+}
+
+.checkbox.work > label:after {
+    content: "Резюме";
+}
+
+.checkbox input[type="checkbox"]:checked ~ label:before {
+    background: #4d5869;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.checkbox.status input[type="checkbox"]:checked ~ label:before {
+    background: #99B45F;
+    border: none;
+}
+
+.checkbox.status input[type="checkbox"]:checked ~ label > i {
+    left: 10px;
+    margin-left: 0;
+    background-position: -288px 0;
+}
+
+.checkbox input[type="checkbox"]:checked ~ label:after {
+    background: #626d7f;
+    box-shadow: none;
+}
+
+.checkbox.status input[type="checkbox"]:checked ~ label:after {
+    background: #A6C368;
+}

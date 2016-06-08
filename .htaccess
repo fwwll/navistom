@@ -1,0 +1,39 @@
+# deny access to the top-level git repository:
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^(.*).navistom.com [NC]
+RewriteRule ^(.*)$ http://navistom.com/$1 [L,R=permanent]
+RewriteRule \.git - [F,L]
+
+AddDefaultCharset utf-8
+
+Options +SymLinksIfOwnerMatch  
+RewriteEngine On  
+
+RewriteCond %{HTTP_HOST} ^www.navistom.com$ [NC]
+RewriteRule ^(.*)$ http://navistom.com/$1 [R=301,L]
+
+
+#RewriteCond %{QUERY_STRING} ^(.*)print [NC]
+#RewriteRule ^(.*)$ /$1? [R=301,L]
+
+
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f 
+
+RewriteRule ^(.*)$ ./index.php?route=$1
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType image/gif "access plus 2 months"
+    ExpiresByType image/jpeg "access plus 2 months"
+	ExpiresByType image/ico "access plus 2 months"
+	ExpiresByType image/png "access plus 2 months"
+</IfModule>
+
+
+
+
+
+
